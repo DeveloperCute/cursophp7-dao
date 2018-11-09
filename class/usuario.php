@@ -50,12 +50,9 @@
 
 			if(count($result) > 0){
 
-				$row = $result[0];
+			$this->setData($result[0]);
 
-				$this->setIdusuario($row['idusuario']);
-				$this->setDeslogin($row['deslogin']);
-				$this->setDessenha($row['dessenha']);
-				$this->setDtcadastro(new DateTime($row['dtcadastro']));
+			
 			}
 		}
 
@@ -99,12 +96,8 @@
 
 			if(count($result) > 0){
 
-				$row = $result[0];
+				$this->setData($result[0]);
 
-				$this->setIdusuario($row['idusuario']);
-				$this->setDeslogin($row['deslogin']);
-				$this->setDessenha($row['dessenha']);
-				$this->setDtcadastro(new DateTime($row['dtcadastro']));
 			}else {
 
 				throw new Exception("LOGIN SENHA INVÁLIDOS");
@@ -113,6 +106,34 @@
 			}
 
 		}
+
+		public function setData($data){
+
+				$this->setIdusuario($data['idusuario']);
+				$this->setDeslogin($data['deslogin']);
+				$this->setDessenha($data['dessenha']);
+				$this->setDtcadastro(new DateTime($data['dtcadastro']));
+
+		}
+
+		public function insert(){
+
+			$sql = new sql();
+
+		   	
+    	$result = $sql->select("INSERT INTO tb_usuarios(deslogin, dessenha) VALUES (:LOGIN, :SENHA);"
+    		, array(':LOGIN'=>$this->getDeslogin(),
+					':SENHA'=>$this->getDessenha()
+					));
+ 
+    	$result2 = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = LAST_INSERT_ID()");
+ 
+    	if(count($result2)>0){
+        $this->setData($result2[0]);
+    	}
+		
+		}		
+
 
 	}
 		
