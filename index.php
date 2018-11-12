@@ -20,12 +20,21 @@
 	//$usuario->Login("Marccus", "123456");
 	//echo $usuario;
 
-	$aluno = new usuario();
-
+	//INSERE UM NOVO USUARIO 
+	/*$aluno = new usuario();
 	$aluno->setDeslogin("aluno");
 	$aluno->setDessenha("@alun0");
-
 	$aluno->insert();
+	echo $aluno;*/
 
-	echo $aluno;
+	$usuario = new usuario();
+
+	$usuario->loadById(5);
+
+
+	$usuario->update("Professor", "$#@#$@$#");
+
+	echo $usuario;
+
+
  ?>	
