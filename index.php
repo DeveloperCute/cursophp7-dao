@@ -31,7 +31,7 @@
 
 	$usuario = new usuario();
 	$usuario->loadById(3);
-	$usuario->update("Professor", "$#@#$@$#");
+	$usuario->update("JAMAL", "9999999");
 	echo $usuario;
 
 
